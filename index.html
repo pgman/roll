@@ -25,8 +25,20 @@ function init() {
         updateView()
     });  
     document.body.addEventListener('click', function(e) {
-        if(e.target.id.startsWith("delete")) {
-            alert("push delete")
+        if(e.target.id.startsWith('remove')) {
+            var id = e.target.id;
+            var splits = id.split("-");
+            if(splits.length != 2) { return; }
+            var index = Number(splits[1]);
+            datas.splice(index, 1); 
+            updateView();
+        }
+    });
+    document.body.addEventListener('input', function(e) {
+        var value = e.target.value;
+        // 非負整数のみ許可（空文字も一時的に許容）
+        if(!/^\d*$/.test(value)) {
+            e.target.value = value.replace(/[^\d]/g, '');
         }
     });
 }
@@ -41,17 +53,16 @@ function updateView() {
         return document.getElementById(id);
     }
     let html = "";
-    html = datas.reduce(function(p, c, i) {
-        html = "";
+    for(i = datas.length - 1; i >= 0; i -= 1) {
+        data = datas[i];
         html += '<div>';
-        html += '<input id="start-balls-' + i + '" type="number" value="' + c.startBalls + '">&nbsp;';
-        html += '<input id="start-rolls-' + i + '" type="number" value="' + c.startRolls + '">&nbsp;';
-        html += '<input id="end-balls-' + i + '" type="number" value="' + c.endBalls + '">&nbsp;';
-        html += '<input id="end-rolls-' + i + '" type="number" value="' + c.endRolls + '">&nbsp;';
-        html += '<input id="delete-' + i + '" type="button" value="Delete">&nbsp;';
+        html += '<input id="start-balls-' + i + '" type="number" value="' + data.startBalls + '">&nbsp;';
+        html += '<input id="start-rolls-' + i + '" type="number" value="' + data.startRolls + '">&nbsp;';
+        html += '<input id="end-balls-' + i + '" type="number" value="' + data.endBalls + '">&nbsp;';
+        html += '<input id="end-rolls-' + i + '" type="number" value="' + data.endRolls + '">&nbsp;';
+        html += '<input id="remove-' + i + '" type="button" value="Remove">&nbsp;';
         html += '</div>';
-        return p + html;
-    }, "");
+    }
     $("data-area").innerHTML = html;
 }
 </script>
