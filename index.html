@@ -24,6 +24,11 @@ function init() {
         });
         updateView()
     });  
+    document.body.addEventListener('click', function(e) {
+        if(e.target.id.startsWith("delete")) {
+            alert("push delete")
+        }
+    });
 }
 function save() {
 
@@ -40,7 +45,10 @@ function updateView() {
         html = "";
         html += '<div>';
         html += '<input id="start-balls-' + i + '" type="number" value="' + c.startBalls + '">&nbsp;';
-        html += '<input id="start-rolls-' + i + '" type="number" value="' + c.startRolls + '">';
+        html += '<input id="start-rolls-' + i + '" type="number" value="' + c.startRolls + '">&nbsp;';
+        html += '<input id="end-balls-' + i + '" type="number" value="' + c.endBalls + '">&nbsp;';
+        html += '<input id="end-rolls-' + i + '" type="number" value="' + c.endRolls + '">&nbsp;';
+        html += '<input id="delete-' + i + '" type="button" value="Delete">&nbsp;';
         html += '</div>';
         return p + html;
     }, "");
