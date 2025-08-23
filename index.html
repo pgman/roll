@@ -7,6 +7,9 @@
 #new-button {
     font-size: 24px;
 }
+input[type="number"] {
+    width: 40px;
+}
 </style>
 <script>
 var datas = []
@@ -37,7 +40,12 @@ function updateView() {
     }
     let html = "";
     html = datas.reduce(function(p, c, i) {
-        return p + "a"
+        html = "";
+        html += '<div>';
+        html += '<input id="start-balls-' + i + '" type="number" value="' + c.startBalls + '">&nbsp;';
+        html += '<input id="start-rolls-' + i + '" type="number" value="' + c.startRolls + '">';
+        html += '</div>';
+        return p + html;
     }, "");
     $("data-area").innerHTML = html;
 }
