@@ -9,9 +9,37 @@
 }
 </style>
 <script>
+var datas = []
 document.addEventListener('DOMContentLoaded', init);
 function init() {
-    alert("init")
+    function $(id) {
+        return document.getElementById(id);
+    }
+    $("new-button").addEventListener('click', function(e) {
+        datas.push({
+            startBalls: 0,
+            startRolls: 0,
+            endBalls: 0,
+            endRolls: 0,            
+        });
+        updateView()
+    });  
+}
+function save() {
+
+}
+function load() {
+
+}
+function updateView() {
+    function $(id) {
+        return document.getElementById(id);
+    }
+    let html = "";
+    html = datas.reduce(function(p, c, i) {
+        return p + "a"
+    }, "");
+    $("data-area").innerHTML = html;
 }
 </script>
 </head>
@@ -21,6 +49,5 @@ function init() {
     <div id="data-area">
 
     </div>
-    rolltest
 </body>
 </html>
