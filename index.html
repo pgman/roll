@@ -38,24 +38,31 @@ function init() {
         var value = e.target.value;
         num = Number(value)
         if(isNaN(num)) {
-            alert("not number");
+            console.log("not number");
+            updateView();
+            return;
+        }
+        if(num < 0) {
+            console.log("not positive");
+            updateView();
             return;
         }
         intNum = parseInt(num);
         if(num !== intNum) {
-            alert("not integer");
+            console.log("not integer");
+            updateView();
             return;
-        }
-        if(num < 0) {
-            alert("not positive");
-            return;
-        }
-        alert("OK: " + num);
+        }        
 
-        // // 非負整数のみ許可（空文字も一時的に許容）
-        // if(!/^\d*$/.test(value)) {
-        //     e.target.value = value.replace(/[^\d]/g, '');
-        // }
+        id = e.target.id;
+        splits = id.split('-');
+        if(splits.length !== 2) {
+            return;
+        }
+        var index = Number(splits[1]);
+        var prop = splits[0];
+        datas[index][prop] = num;
+        updateView();
     });
 }
 function save() {
@@ -68,7 +75,7 @@ function updateView() {
     function $(id) {
         return document.getElementById(id);
     }
-    // Upddate roll
+    // Update RPK (roll per 1k)
     // Update List
     let html = "";
     for(i = datas.length - 1; i >= 0; i -= 1) {
@@ -85,9 +92,12 @@ function updateView() {
 }
 </script>
 </head>
-<body>v4
-    <div id="roll-area"></div>
-    <input id="new-button" type="button" value="New">
+<body>
+    v5<br>
+    <div id="top-area">
+        <span id="rpk-span"></span>
+        <input id="new-button" type="button" value="New">    
+    </div>
     <div id="data-area">
 
     </div>
