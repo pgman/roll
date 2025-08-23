@@ -42,7 +42,7 @@ function init() {
             return;
         }
         intNum = parseInt(num);
-        if(intNum !== num) {
+        if(num !== intNum) {
             alert("not integer");
             return;
         }
@@ -50,6 +50,7 @@ function init() {
             alert("not positive");
             return;
         }
+        alert("OK: " + num);
 
         // // 非負整数のみ許可（空文字も一時的に許容）
         // if(!/^\d*$/.test(value)) {
@@ -67,6 +68,8 @@ function updateView() {
     function $(id) {
         return document.getElementById(id);
     }
+    // Upddate roll
+    // Update List
     let html = "";
     for(i = datas.length - 1; i >= 0; i -= 1) {
         data = datas[i];
@@ -82,7 +85,7 @@ function updateView() {
 }
 </script>
 </head>
-<body>v3
+<body>v4
     <div id="roll-area"></div>
     <input id="new-button" type="button" value="New">
     <div id="data-area">
