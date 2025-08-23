@@ -12,6 +12,8 @@ input[type="number"] {
 var datas = []
 document.addEventListener('DOMContentLoaded', init);
 function init() {
+    load();
+    updateView();
     function $(id) {
         return document.getElementById(id);
     }
@@ -63,6 +65,7 @@ function init() {
         var prop = splits[0];
         datas[index][prop] = num;
         updateView();
+        save();
     });
 }
 function save() {
@@ -76,8 +79,22 @@ function updateView() {
         return document.getElementById(id);
     }
     // Update RPK (roll per 1k)
+    var sumBalls = 0, sumRolls = 0;
+    for(i = 0; i < datas.length; i += 1) {
+        data = datas[i];
+        if(data.endBalls > data.startBalls) { continue; }
+        if(data.endRolls < data.startRolls) { continue; }
+        sumBalls += data.startBalls - data.endBalls;
+        sumRolls += data.endRolls - data.startRolls;
+    }
+    var rpkText = "None";
+    if(sumBalls > 0) {
+        rpkText = (sumRolls / sumBalls * 250).toFixed(2);
+    }
+    $('rpk-span').innerText = rpkText;
+
     // Update List
-    let html = "";
+    var html = "";
     for(i = datas.length - 1; i >= 0; i -= 1) {
         data = datas[i];
         html += '<div>';
@@ -88,12 +105,12 @@ function updateView() {
         html += '<input id="remove-' + i + '" type="button" value="Remove">&nbsp;';
         html += '</div>';
     }
-    $("data-area").innerHTML = html;
+    $('data-area').innerHTML = html;
 }
 </script>
 </head>
 <body>
-    v5<br>
+    v6<br>
     <div id="top-area">
         <span id="rpk-span"></span>
         <input id="new-button" type="button" value="New">    
