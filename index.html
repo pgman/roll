@@ -24,7 +24,8 @@ function init() {
             endBalls: 0,
             endRolls: 0,            
         });
-        updateView()
+        updateView();        
+        save();
     });  
     document.body.addEventListener('click', function(e) {
         if(e.target.id.startsWith('remove')) {
@@ -34,6 +35,7 @@ function init() {
             var index = Number(splits[1]);
             datas.splice(index, 1); 
             updateView();
+            save();
         }
     });
     document.body.addEventListener('change', function(e) {
@@ -69,10 +71,13 @@ function init() {
     });
 }
 function save() {
-
+    localStorage.setItem('rpk-key', JSON.stringify(datas));
 }
 function load() {
-
+    var json = localStorage.getItem('rpk-key');
+    if(json) {
+        datas = JSON.parse(json);
+    }
 }
 function updateView() {
     function $(id) {
@@ -110,13 +115,12 @@ function updateView() {
 </script>
 </head>
 <body>
-    v6<br>
+    v7<br>
     <div id="top-area">
         <span id="rpk-span"></span>
         <input id="new-button" type="button" value="New">    
     </div>
     <div id="data-area">
-
     </div>
 </body>
 </html>
