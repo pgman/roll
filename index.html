@@ -34,12 +34,27 @@ function init() {
             updateView();
         }
     });
-    document.body.addEventListener('input', function(e) {
+    document.body.addEventListener('change', function(e) {
         var value = e.target.value;
-        // 非負整数のみ許可（空文字も一時的に許容）
-        if(!/^\d*$/.test(value)) {
-            e.target.value = value.replace(/[^\d]/g, '');
+        num = Number(value)
+        if(isNaN(num)) {
+            alert("not number");
+            return;
         }
+        intNum = parseInt(num);
+        if(intNum !== num) {
+            alert("not integer");
+            return;
+        }
+        if(num < 0) {
+            alert("not positive");
+            return;
+        }
+
+        // // 非負整数のみ許可（空文字も一時的に許容）
+        // if(!/^\d*$/.test(value)) {
+        //     e.target.value = value.replace(/[^\d]/g, '');
+        // }
     });
 }
 function save() {
@@ -67,7 +82,7 @@ function updateView() {
 }
 </script>
 </head>
-<body>v2
+<body>v3
     <div id="roll-area"></div>
     <input id="new-button" type="button" value="New">
     <div id="data-area">
