@@ -56,10 +56,10 @@ function updateView() {
     for(i = datas.length - 1; i >= 0; i -= 1) {
         data = datas[i];
         html += '<div>';
-        html += '<input id="start-balls-' + i + '" type="number" value="' + data.startBalls + '">&nbsp;';
-        html += '<input id="start-rolls-' + i + '" type="number" value="' + data.startRolls + '">&nbsp;';
-        html += '<input id="end-balls-' + i + '" type="number" value="' + data.endBalls + '">&nbsp;';
-        html += '<input id="end-rolls-' + i + '" type="number" value="' + data.endRolls + '">&nbsp;';
+        html += '<input id="startBalls-' + i + '" type="number" value="' + data.startBalls + '">&nbsp;';
+        html += '<input id="startRolls-' + i + '" type="number" value="' + data.startRolls + '">&nbsp;';
+        html += '<input id="endBalls-' + i + '" type="number" value="' + data.endBalls + '">&nbsp;';
+        html += '<input id="endRolls-' + i + '" type="number" value="' + data.endRolls + '">&nbsp;';
         html += '<input id="remove-' + i + '" type="button" value="Remove">&nbsp;';
         html += '</div>';
     }
@@ -67,7 +67,7 @@ function updateView() {
 }
 </script>
 </head>
-<body>
+<body>v2
     <div id="roll-area"></div>
     <input id="new-button" type="button" value="New">
     <div id="data-area">
