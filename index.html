@@ -4,8 +4,11 @@
 <meta charset="utf-8">
 <title>RPK</title>
 <style>
-input[type="number"] {
+input[type="number"].balls {
     width: 40px;
+}
+input[type="number"].rolls {
+    width: 32px;
 }
 </style>
 <script>
@@ -131,10 +134,10 @@ function updateView() {
             rpkText += ' (' + diffBalls + ')';
         }
         html += '<span>' + rpkText + '</span>&nbsp;';
-        html += '<input id="startBalls-' + i + '" type="number" value="' + data.startBalls + '">&nbsp;';
-        html += '<input id="startRolls-' + i + '" type="number" value="' + data.startRolls + '">&nbsp;';
-        html += '<input id="endBalls-' + i + '" type="number" value="' + data.endBalls + '">&nbsp;';
-        html += '<input id="endRolls-' + i + '" type="number" value="' + data.endRolls + '">&nbsp;';
+        html += '<input id="startBalls-' + i + '" class="balls" type="number" value="' + data.startBalls + '">&nbsp;';
+        html += '<input id="startRolls-' + i + '" class="rolls" type="number" value="' + data.startRolls + '">&nbsp;';
+        html += '<input id="endBalls-' + i + '" class="balls" type="number" value="' + data.endBalls + '">&nbsp;';
+        html += '<input id="endRolls-' + i + '" class="rolls" type="number" value="' + data.endRolls + '">&nbsp;';
         html += '<input id="copy-' + i + '" type="button" value="Copy">&nbsp;';
         html += '<input id="remove-' + i + '" type="button" value="Remove">&nbsp;';
         html += '</div>';
