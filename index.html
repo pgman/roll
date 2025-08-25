@@ -21,6 +21,11 @@ function init() {
     function $(id) {
         return document.getElementById(id);
     }
+    function getIndexById(id) {
+        var splits = id.split("-");
+        if(splits.length != 2) { return -1; }
+        return Number(splits[1]);
+    }
 
     // Attach Events
     $("new-button").addEventListener('click', function(e) {
@@ -40,12 +45,7 @@ function init() {
             save();
         }        
     });  
-    document.body.addEventListener('click', function(e) {
-        function getIndexById(id) {
-            var splits = id.split("-");
-            if(splits.length != 2) { return -1; }
-            return Number(splits[1]);
-        }
+    document.body.addEventListener('click', function(e) {        
         if(e.target.id.startsWith('remove')) {
             if(window.confirm("Do you really want to remove?")) {
                 var index = getIndexById(e.target.id);
@@ -80,12 +80,10 @@ function init() {
             return;
         }        
 
-        id = e.target.id;
-        splits = id.split('-');
-        if(splits.length !== 2) {
-            return;
-        }
-        var index = Number(splits[1]);
+        var index = getIndexById(e.target.id);
+        if(index < 0) { return; }
+        splits = e.target.id.split('-');
+        if(splits.length != 2) { return; }   
         var prop = splits[0];
         datas[index][prop] = num;
         updateView();
