@@ -11,12 +11,15 @@ input[type="number"] {
 <script>
 var datas = []
 document.addEventListener('DOMContentLoaded', init);
+
 function init() {
     load();
     updateView();
     function $(id) {
         return document.getElementById(id);
     }
+
+    // Attach Events
     $("new-button").addEventListener('click', function(e) {
         datas.push({
             startBalls: 0,
@@ -43,6 +46,7 @@ function init() {
         if(e.target.id.startsWith('remove')) {
             if(window.confirm("Do you really want to remove?")) {
                 var index = getIndexById(e.target.id);
+                if(index < 0) { return; }
                 // Remove
                 datas.splice(index, 1); 
                 updateView();
@@ -50,6 +54,7 @@ function init() {
             }
         } else if(e.target.id.startsWith('copy')) {
             var index = getIndexById(e.target.id);
+            if(index < 0) { return; }
             // Copy
             datas[index].endBalls = datas[index].startBalls; 
             datas[index].endRolls = datas[index].startRolls; 
