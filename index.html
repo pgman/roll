@@ -22,13 +22,13 @@ function init() {
         return document.getElementById(id);
     }
     function getIndexById(id) {
-        var splits = id.split("-");
+        var splits = id.split('-');
         if(splits.length != 2) { return -1; }
         return Number(splits[1]);
     }
 
     // Attach Events
-    $("new-button").addEventListener('click', function(e) {
+    $('new-button').addEventListener('click', function(e) {
         datas.push({
             startBalls: 0,
             startRolls: 0,
@@ -38,8 +38,8 @@ function init() {
         updateView();        
         save();
     });
-    $("reset-button").addEventListener('click', function(e) {
-        if(window.confirm("Do you really want to reset?")) {
+    $('reset-button').addEventListener('click', function(e) {
+        if(window.confirm('Do you really want to reset?')) {
             datas = [];
             updateView();        
             save();
@@ -47,7 +47,7 @@ function init() {
     });  
     document.body.addEventListener('click', function(e) {        
         if(e.target.id.startsWith('remove')) {
-            if(window.confirm("Do you really want to remove?")) {
+            if(window.confirm('Do you really want to remove?')) {
                 var index = getIndexById(e.target.id);
                 if(index < 0) { return; }
                 // Remove
@@ -69,13 +69,13 @@ function init() {
         var value = e.target.value;
         num = Number(value)
         if(isNaN(num)) {
-            console.log("not number");
+            console.log('not number');
             updateView();
             return;
         }
         intNum = parseInt(num);
         if(num !== intNum) {
-            console.log("not integer");
+            console.log('not integer');
             updateView();
             return;
         }        
@@ -112,24 +112,24 @@ function updateView() {
         sumBalls += data.startBalls - data.endBalls;
         sumRolls += data.endRolls - data.startRolls;
     }
-    var rpkText = "-";
-    if(sumBalls > 0) {
+    var rpkText = '-';
+    if(sumRolls >= 0 && sumBalls > 0) {
         rpkText = (sumRolls / sumBalls * 250).toFixed(2);
-        rpkText += ' (' + sumBalls + ')';
+        rpkText += ' (' + sumRolls + ')';
     }
     $('rpk-span').innerText = rpkText;
 
     // Update List
-    var html = "";
+    var html = '';
     for(i = datas.length - 1; i >= 0; i -= 1) {
         data = datas[i];
         html += '<div>';
         diffBalls = data.startBalls - data.endBalls;
         diffRolls = data.endRolls - data.startRolls;
-        var rpkText = "-";
+        var rpkText = '-';
         if(diffRolls >= 0 && diffBalls > 0) {
             rpkText = (diffRolls / diffBalls * 250).toFixed(2);
-            rpkText += ' (' + diffBalls + ')';
+            rpkText += ' (' + diffRolls + ')';
         }
         html += '<span>' + rpkText + '</span>&nbsp;';
         html += '<input id="startBalls-' + i + '" class="balls" type="number" value="' + data.startBalls + '">&nbsp;';
